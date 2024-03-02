@@ -1,34 +1,34 @@
+#!/usr/bin/python3
 # coding: utf-8
+
+from datetime import datetime
 year = datetime.now().strftime('%Y')
 print(f'''
 [Prompt] Image Downloader
-[Prompt] Repo: wyf01239/simg (SECRET)
+[Prompt] Repo: GitHub @wyf01239/simg (SECRET)
 [Prompt] Copyright ©2020-{year} wyf9. All Rights Reserved.
 
-[Warning] 作者不承担任何因此工具产生的责任!
+[Warning] 作者不承担任何因此工具产生的相关责任!
 
 [Prompt] API From: https://sex.nyan.xyz
 ''')
 
-import requests
-import time
-from tqdm import tqdm
-from datetime import datetime
 import sys
+import time
+import requests
+from tqdm import tqdm
 from PIL import Image
+
+global waittime
+global base_site
+global time_style
 
 # Config
 
-global waittime = 30; # 等待时间 (秒)
-global base_site = 'https://cfpx.wyf9.top/https://sex.nyan.xyz' # Base API 站点 (末尾不带 `/`)
+waittime = 10 # 等待时间 (秒)
+base_site = 'https://cfpx.wyf9.top/https://sex.nyan.xyz' # Base API 站点 (末尾不带 `/`)
 # Default: 'https://sex.nyan.xyz'
-time_style = '[%Y-%m-%d %H:%M:%S]' # 时间格式
 # Default: '[%Y-%m-%d %H:%M:%S]' -> "[2024-03-02 12:10:35]"
-
-global timenow = datetime.now().strftime(time_style)
-
-def timen():
-    global timenow = datetime.now().strftime(time_style)
 
 # 检查命令行参数的数量
 if len(sys.argv) < 4:
@@ -40,7 +40,7 @@ else:
     last = int(sys.argv[2])
     r18 = sys.argv[3]
     if (r18 != "true") and (r18 != "false"):
-        print("r18: true / false")
+        print("[Tip] r18: true / false")
     print(f"[Info] count: {count} / last: {last} / r18: {r18}")
 
 def verifyimg(file_path):
@@ -72,16 +72,22 @@ while True:
         image_filename = f"r18img/image_{count}.jpg"
     else:
         image_filename = f"img/image_{count}.jpg"
-    timen(); print(f"[Running] {timenow} Downloading #{count} / {last}...")
-    timen(); get_and_save_image(api_url, image_filename)
+    #timenow = datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')
+    print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Downloading #{count} / {last}...")
     
-    timen(); print(f"[Running] {timenow} Checking image #{count}...")
-    if verifyimg(image_filename)
-    
-    timen(); print(f"[Running] {timenow} #{count} downloaded.")
+    while True:
+        get_and_save_image(api_url, image_filename)
+        
+        print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Checking image #{count}: '{image_filename}'...")
+        if verifyimg(image_filename):
+            print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} Verify OK.")
+            break
+        else:
+            print(f"[Warning] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} Invaild image, Retrying...")
+    print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} downloaded.")
 
     if count >= last:
-        timen(); print(f"[Info] {timenow} #{last} End.")
+        print(f"[Info] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{last} End.")
         exit()
   
     # 增加编号
