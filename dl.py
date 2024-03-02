@@ -27,7 +27,7 @@ global max_size
 
 # Config
 
-waittime = 10 # 等待时间 (秒)
+waittime = 30 # 等待时间 (秒)
 base_site = 'https://cfpx.wyf9.top/https://sex.nyan.xyz' # Base API 站点 (末尾不带 `/`)
 # Default: 'https://sex.nyan.xyz'
 no_r18 = True # Disable r18: True / False
@@ -75,12 +75,12 @@ def checksize(file_path, max_size):
 
 # 自动上传
 def upload():
-    print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload]: Run git add")
+    print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git add")
     print(os.system('git add .'))
     upl_time = datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')
-    print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload]: Run git commit")
+    print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git commit")
     print(os.system(f'git commit -S -m "Auto Upload: {upl_time}"'))
-    print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload]: Run git push")
+    print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git push")
     print(os.system('git push'))
 
 def get_and_save_image(url, filename):
@@ -101,9 +101,9 @@ while True:
     
     # 发送GET请求并保存图片
     if r18 == "true":
-        image_filename = f"r18img/image_{count}.jpg"
+        image_filename = f"r18img/{count}.jpg"
     else:
-        image_filename = f"img/image_{count}.jpg"
+        image_filename = f"img/{count}.jpg"
     print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Downloading #{count} / {last}...")
     
     while True:
@@ -122,11 +122,12 @@ while True:
     print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} downloaded.")
 
     if count >= last:
-        print(f"[Info] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{last} End.")
+        print(f"[End] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{last} End.")
         if auto_upload == 1:
             print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Auto Upload Started.")
             upload()
-            print(f"[Warning] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Auto Upload Ended.")
+            print(f"[End] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Auto Upload Ended.")
+        print(f"[Finish] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Finished.")
         exit()
   
     # 增加编号
