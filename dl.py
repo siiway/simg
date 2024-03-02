@@ -1,3 +1,15 @@
+# coding: utf-8
+year = datetime.now().strftime('%Y')
+print(f'''
+[Prompt] Image Downloader
+[Prompt] Repo: wyf01239/simg (SECRET)
+[Prompt] Copyright ©2020-{year} wyf9. All Rights Reserved.
+
+[Warning] 作者不承担任何因此工具产生的责任!
+
+[Prompt] API From: https://sex.nyan.xyz
+''')
+
 import requests
 import time
 from tqdm import tqdm
@@ -5,9 +17,22 @@ from datetime import datetime
 import sys
 from PIL import Image
 
+# Config
+
+global waittime = 30; # 等待时间 (秒)
+global base_site = 'https://cfpx.wyf9.top/https://sex.nyan.xyz' # Base API 站点 (末尾不带 `/`)
+# Default: 'https://sex.nyan.xyz'
+time_style = '[%Y-%m-%d %H:%M:%S]' # 时间格式
+# Default: '[%Y-%m-%d %H:%M:%S]' -> "[2024-03-02 12:10:35]"
+
+global timenow = datetime.now().strftime(time_style)
+
+def timen():
+    global timenow = datetime.now().strftime(time_style)
+
 # 检查命令行参数的数量
 if len(sys.argv) < 4:
-    print("Usage: python3 dl.py <count> <last> <r18>")
+    print("[Tip] Usage: python3 dl.py <count> <last> <r18>")
     exit(1)
 else:
     # 获取第一个命令行参数
@@ -16,7 +41,7 @@ else:
     r18 = sys.argv[3]
     if (r18 != "true") and (r18 != "false"):
         print("r18: true / false")
-    print(f"count: {count} / last: {last} / r18: {r18}")
+    print(f"[Info] count: {count} / last: {last} / r18: {r18}")
 
 def verifyimg(file_path):
     try:
@@ -40,26 +65,27 @@ def get_and_save_image(url, filename):
 
 while True:
     # 构造API请求URL
-    api_url = f"https://cfpx.wyf9.top/https://sex.nyan.xyz/api/v2/img?r18={r18}"
-
+    api_url = f"{base_site}/api/v2/img?r18={r18}"
+    
     # 发送GET请求并保存图片
     if r18 == "true":
         image_filename = f"r18img/image_{count}.jpg"
     else:
         image_filename = f"img/image_{count}.jpg"
-    print(f"{current_time} Downloading #{count} / {last}...")
-    get_and_save_image(api_url, image_filename)
+    timen(); print(f"[Running] {timenow} Downloading #{count} / {last}...")
+    timen(); get_and_save_image(api_url, image_filename)
     
-    print(f"{current_time} Downloading #{count} / {last}...")
+    timen(); print(f"[Running] {timenow} Checking image #{count}...")
+    if verifyimg(image_filename)
     
-    print(f"{current_time} #{count} downloaded.")
+    timen(); print(f"[Running] {timenow} #{count} downloaded.")
 
     if count >= last:
-        print(f"{current_time} #{last} End.")
+        timen(); print(f"[Info] {timenow} #{last} End.")
         exit()
   
     # 增加编号
     count += 1
 
-    # 间隔1分钟
-    time.sleep(30)
+    # 间隔(s)
+    time.sleep(waittime)
