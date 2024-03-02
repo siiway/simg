@@ -25,7 +25,7 @@ global max_size
 
 # Config
 
-waittime = 15 # 等待时间 (秒)
+waittime = 100 # 等待时间 (秒)
 base_site = 'https://cfpx.wyf9.top/https://sex.nyan.xyz' # Base API 站点 (末尾不带 `/`)
 # Default: 'https://sex.nyan.xyz'
 no_r18 = True # Disable r18: True / False
