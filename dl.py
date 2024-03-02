@@ -7,9 +7,7 @@ print(f'''
 [Prompt] Image Downloader
 [Prompt] Repo: GitHub @wyf01239/simg (SECRET)
 [Prompt] Copyright ©2020-{year} wyf9. All Rights Reserved.
-
 [Warning] 作者不承担任何因此工具产生的相关责任!
-
 [Prompt] API From: https://sex.nyan.xyz
 ''')
 
@@ -27,7 +25,7 @@ global max_size
 
 # Config
 
-waittime = 30 # 等待时间 (秒)
+waittime = 15 # 等待时间 (秒)
 base_site = 'https://cfpx.wyf9.top/https://sex.nyan.xyz' # Base API 站点 (末尾不带 `/`)
 # Default: 'https://sex.nyan.xyz'
 no_r18 = True # Disable r18: True / False
