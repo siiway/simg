@@ -3,6 +3,7 @@
 
 import os
 import sys
+import time
 from dl import upload
 
 if len(sys.argv) < 3:
@@ -13,7 +14,8 @@ start = int(sys.argv[1])
 end = int(sys.argv[2])
 
 r18 = "false"
-auto_upload = False
+auto_upload = 0
+wait_time = 75
 
 print(f"[Checker] Check Started: start: {start} / end: {end} / r18: {r18} / auto_upload: {auto_upload}")
 
@@ -24,9 +26,10 @@ for i in range(start, end + 1):
             break
         else:
             print(f"[Checker] #{i} not exist, redownloading...")
-            os.system("dl.py {i} {i} {r18} {auto_upload}")
+            os.system(f"./dl.py {i} {i} {r18} {auto_upload}")
+    #if i != end:time.sleep(wait_time)
 
-if auto_upload == True:
+if auto_upload == 1:
     print(f"[Checker] Auto uploading...")
     upload()
 
