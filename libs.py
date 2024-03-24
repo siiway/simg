@@ -11,6 +11,10 @@ except: print("[Error]  导入失败，请检查是否安装"); err = True
 '''
 err = False
 
+import os
+import sys
+from datetime import datetime
+
 try: import requests
 except: print("[Error] requests 导入失败，请检查是否安装"); err = True
 try: from tqdm import tqdm
