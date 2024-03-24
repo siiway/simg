@@ -41,14 +41,14 @@ def checksize(file_path, max_size):
     return size_in_megabytes <= max_size
 
 # 自动上传 (git cmd)
-def upload_legacy():
+def upload_legacy(baseph):
     print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git add")
-    print(os.system('git add .'))
+    print(os.system('cd {baseph} && git add .'))
     upl_time = datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')
     print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git commit")
-    print(os.system(f'git commit -S -m "Auto Upload: {upl_time}"'))
+    print(os.system(f'cd {baseph} && git commit -S -m "Auto Upload: {upl_time}"'))
     print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git push")
-    print(os.system('git push'))
+    print(os.system('cd {baseph} && git push'))
 
 def save_file(url, filename):
     response = requests.get(url, stream=True)

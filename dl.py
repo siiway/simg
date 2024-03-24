@@ -19,6 +19,8 @@ from libs import verifyimg, checksize, upload_legacy, save_file # 库
 
 import config as cfg # 配置
 
+print(sys.argv)
+
 # 检查命令行参数的数量
 if len(sys.argv) < 4:
     print("[Tip] Usage: python3 dl.py <count> <last> <auto_upload:0/1>")
@@ -73,7 +75,7 @@ for count in range(start, last + 1):
 print(f"[End] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{last} End.")
 if auto_upload == 1:
     print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Auto Upload Started.")
-    upload_legacy()
+    upload_legacy(cfg.base_path)
     print(f"[End] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Auto Upload Ended.")
 print(f"[Finish] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Finished.")
 exit()

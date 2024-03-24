@@ -4,7 +4,7 @@
 # ---config start---
 
 # 每次下载间的等待时间 (秒)
-waittime = 100
+waittime = 30
 
 # Base API 站点 (末尾不带 `/`)
 # Default: 'https://sex.nyan.xyz'
