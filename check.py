@@ -4,7 +4,7 @@
 import os
 import sys
 import time
-from dl import upload
+from libs import upload
 
 if len(sys.argv) < 3:
     print("[Tip] Usage: python3 check.py <start> <end>")
@@ -13,6 +13,7 @@ if len(sys.argv) < 3:
 start = int(sys.argv[1])
 end = int(sys.argv[2])
 
+# Config
 r18 = "false"
 auto_upload = 0
 wait_time = 75

@@ -1,6 +1,10 @@
 # simg
 
-___ Image Download and Hosting *(disabled r18)*
+Image Download and Hosting
+
+> 图片存储在 `img` 分支
+
+~~> 修改中: 使用 GitHub API 上传文件~~
 
 **Usage / 使用**: python3 dl.py `count` `last` `r18` `auto_upload`
 
