@@ -19,8 +19,6 @@ from libs import verifyimg, checksize, upload_legacy, save_file # 库
 
 import config as cfg # 配置
 
-print(sys.argv)
-
 # 检查命令行参数的数量
 if len(sys.argv) < 4:
     print("[Tip] Usage: python3 dl.py <count> <last> <auto_upload:0/1>")
@@ -79,45 +77,3 @@ if auto_upload == 1:
     print(f"[End] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Auto Upload Ended.")
 print(f"[Finish] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Finished.")
 exit()
-'''
-while True:
-    # 构造API请求URL
-    api_url = f"{base_site}/api/v2/img?r18={r18}"
-    
-    # 发送GET请求并保存图片
-    if r18 == "true":
-        image_filename = f"r18img/{count}.jpg"
-    else:
-        image_filename = f"img/{count}.jpg"
-    print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Downloading #{count} / {last}...")
-    
-    while True:
-        save_file(api_url, image_filename)
-        
-        print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Checking image #{count}: '{image_filename}'...")
-        if verifyimg(image_filename):
-            print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} Verify image OK.")
-            if checksize(image_filename, max_size):
-                print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} Verify size OK.")
-                break
-            else:
-                print(f"[Warning] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} File size too large, Retrying...")
-        else:
-            print(f"[Warning] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} Invaild image, Retrying...")
-    print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} downloaded.")
-
-    if count >= last:
-        print(f"[End] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{last} End.")
-        if auto_upload == 1:
-            print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Auto Upload Started.")
-            upload_legacy()
-            print(f"[End] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Auto Upload Ended.")
-        print(f"[Finish] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Finished.")
-        exit()
-  
-    # 增加编号
-    count += 1
-
-    # 间隔(s)
-    time.sleep(waittime)
-'''
