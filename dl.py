@@ -31,6 +31,7 @@ auto_upload = int(sys.argv[3])
 
 if (auto_upload != 0) and (auto_upload != 1):
     print("[Tip] auto_upload: 0 / 1")
+    exit(1)
 
 print(f"[Info] start: {start} / last: {last} / auto_upload: {auto_upload}")
 

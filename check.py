@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 # coding: utf-8
 
+print('unused.')
+exit()
+
 import os
 import sys
 import time

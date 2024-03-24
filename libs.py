@@ -57,3 +57,6 @@ def save_file(url, filename):
             progress_bar.update(len(data))
             file.write(data)
         progress_bar.close()
+
+
+print('[ImgLibs] libs init ok.')
