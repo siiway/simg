@@ -15,11 +15,9 @@ import os
 import sys
 import time
 
-from libs import verifyimg, checksize, upload_legacy, save_file # 库
+import libs # 库
 
 import config as cfg # 配置
-
-print(sys.argv)
 
 # 检查命令行参数的数量
 if len(sys.argv) < 4:
@@ -37,7 +35,6 @@ if (auto_upload != 0) and (auto_upload != 1):
 
 print(f"[Info] start: {start} / last: {last} / auto_upload: {auto_upload}")
 
-
 for count in range(start, last + 1):
     # api path
     api_url = f"{cfg.base_site}/api/v2/img?r18={cfg.r18}"
@@ -51,15 +48,15 @@ for count in range(start, last + 1):
     
     while True:
         try:
-            save_file(api_url, image_filename)
+            libs.save_file(api_url, image_filename)
         except:
             print(f"[Warning] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} Download failed, retrying...")
             continue
         
         print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Checking image #{count}: '{image_filename}'...")
-        if verifyimg(image_filename):
+        if libs.verifyimg(image_filename):
             print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} Verify image OK.")
-            if checksize(image_filename, cfg.max_size):
+            if libs.checksize(image_filename, cfg.max_size):
                 print(f"[Running] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{count} Verify size OK.")
                 break
             else:
@@ -75,7 +72,7 @@ for count in range(start, last + 1):
 print(f"[End] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} #{last} End.")
 if auto_upload == 1:
     print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Auto Upload Started.")
-    upload_legacy(cfg.base_path)
+    libs.upload_legacy(cfg.base_path)
     print(f"[End] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Auto Upload Ended.")
 print(f"[Finish] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} Finished.")
 exit()

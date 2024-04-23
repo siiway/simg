@@ -45,9 +45,8 @@ def upload_legacy(baseph):
     print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git add")
     print(os.system('cd {baseph} && git add .'))
     upl_time = datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')
-    commit = f"Auto Upload: {upl_time}"
     print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git commit")
-    print(os.system(f'cd {baseph} && git commit -S -m "{commit}"'))
+    print(os.system(f'cd {baseph} && git commit -S -m "Auto Upload: {upl_time}"'))
     print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git push")
     print(os.system('cd {baseph} && git push'))
 
