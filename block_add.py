@@ -5,6 +5,7 @@ import config as cfg
 
 import os
 import sys
+from datetime import datetime
 
 start = int(sys.argv[1])
 last = int(sys.argv[2])
@@ -18,13 +19,13 @@ flist = []
 #nownum = start
 
 for s in range(start, last + 1, block):
-    print(s, end=" - ")
+    #print(s, end=" - ")
     e = s + block - 1
     if e > last: e = last
-    print(e, end=": ")
+    #print(e, end=": ")
     flist1 = []
     for i in range(s, e + 1):
-        print(i, end=" ")
+        #print(i, end=" ")
         if r18:
             flist1.append(f"r18img/{i}.jpg")
         else:
@@ -54,5 +55,5 @@ for n in flist:
     print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git commit")
     print(os.system(f'cd {cfg.base_path} && git commit -S -m "{commit}"'))
     print(f"[Uploading] {datetime.now().strftime('[%Y-%m-%d %H:%M:%S]')} [Auto Upload] Run git push")
-    print(os.system('cd {cfg.base_path} && git push'))
+    print(os.system(f'cd {cfg.base_path} && git push'))
 print(f"[BlockAdd] OK.")

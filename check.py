@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 # coding: utf-8
 
-print('unused.')
-exit()
+#print('unused.')
+#exit()
 
 import os
 import sys
 import time
-from libs import upload
+#from libs import upload
+import config as cfg
 
 if len(sys.argv) < 3:
     print("[Tip] Usage: python3 check.py <start> <end>")
@@ -25,12 +26,13 @@ print(f"[Checker] Check Started: start: {start} / end: {end} / r18: {r18} / auto
 
 for i in range(start, end + 1):
     while True:
-        if os.path.exists(f"img/{i}.jpg"):
-            print(f"[Checker] #{i} exists, Pass.")
+        if os.path.exists(os.path.join(cfg.base_path, f"img/{i}.jpg")):
+            #print(f"[Checker] #{i} exists, Pass.")
+            print(i, end=" ")
             break
         else:
             print(f"[Checker] #{i} not exist, redownloading...")
-            os.system(f"./dl.py {i} {i} {r18} {auto_upload}")
+            #os.system(f"./dl.py {i} {i} {r18} {auto_upload}")
     #if i != end:time.sleep(wait_time)
 
 if auto_upload == 1:
